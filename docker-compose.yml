@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    volumes:
+      - ./api:/var/www/html
+    networks:
+      - internal_network
+      
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_DB=tms_db
+      - POSTGRES_USER=tms_user
+      - POSTGRES_PASSWORD=tms_pass
+    volumes:
+      - pgdata:/var/lib/postgres/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "tms_user", "-d", "tms_db"]
+      interval: 10s
+      retries: 5
+    networks:
+      - internal_network
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/app
+    environment:
+      - NODE_ENV=production 
+    depends_on:
+      - api
+    command: ["npm", "start"] 
+    networks:
+      - internal_network
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"    # Porta 80 para o acesso externo
+    depends_on:
+      - api
+      - app
+    networks:
+      - internal_network
+
+  adminer:
+      image: adminer:latest
+      restart: always
+      depends_on:
+        db:
+          condition: service_healthy
+          restart: true
+      networks:
+        - internal_network
+
+volumes:
+  pgdata:
+
+networks:
+  internal_network:
+    driver: bridge

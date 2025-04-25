@@ -1,0 +1,40 @@
+# Ignorar arquivos e diretórios do Composer que não são necessários na imagem final
+/vendor/
+/node_modules/
+
+# Ignorar arquivos temporários de desenvolvimento
+/.idea/
+/.vscode/
+/*.log
+/*.tmp
+/.env.local
+/.env.test
+
+# Ignorar arquivos de cache e logs
+/var/cache/
+/var/log/
+/var/sessions/
+
+# Ignorar arquivos de testes que não são necessários em produção
+/tests/
+/phpunit.xml.dist
+
+# Ignorar diretórios de backup e arquivos de configuração não necessários
+/.git/
+/.gitignore
+
+# Ignorar arquivos de configuração de IDE
+/.vscode/
+/.idea/
+/*.iml
+
+# Ignorar arquivos específicos de desenvolvimento
+/.env
+/.env.local
+/.env.*.local
+
+# Ignorar arquivos gerados durante o build do Next.js (se você tem o Next.js dentro do mesmo repositório)
+# /app/.next/
+
+# Ignorar arquivos do banco de dados
+/database.sqlite

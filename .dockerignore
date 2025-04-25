@@ -1,0 +1,49 @@
+# Ignorar dependências de Node.js e Composer
+/node_modules/
+/vendor/
+
+# Ignorar arquivos de build (tanto do Next.js quanto do Symfony)
+/.next/
+/out/
+/var/cache/
+/var/log/
+/var/sessions/
+
+/# Ignorar arquivos de testes
+/tests/
+/phpunit.xml.dist
+
+# Ignorar arquivos de configuração local (variáveis de ambiente específicas de cada máquina)
+*.env
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# Ignorar diretórios e arquivos específicos de IDE
+/.idea/
+/.vscode/
+/*.iml
+
+# Ignorar arquivos de log e temporários
+*.log
+*.tmp
+*.bak
+
+# Ignorar diretórios de backup
+*~
+
+# Ignorar diretório git e arquivos relacionados ao controle de versão
+/.git/
+/.gitignore
+
+# Ignorar arquivos específicos de configurações de ferramentas de CI/CD
+/.github/
+/.gitlab-ci.yml
+/.gitlab-ci/
+/.travis.yml
+/.circleci/
+
+# Ignorar outros arquivos temporários e desnecessários
+.DS_Store
+Thumbs.db
