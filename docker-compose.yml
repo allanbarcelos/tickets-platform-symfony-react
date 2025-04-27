@@ -9,6 +9,11 @@ services:
       db:
         condition: service_healthy
         restart: true
+    environment:
+      - APP_ENV=prod
+      - APP_SECRET=hFwphdlDPTENGMEYPjbAWwyrcQzzPfkZxLKlfCrNjxAGEiYWtsmt
+      - MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0
+      - DATABASE_URL="postgresql://tickets_user:tickets_pass@db:5432/tickets_db?serverVersion=16&charset=utf8"
     volumes:
       - ./api:/var/www/html
     networks:
@@ -18,13 +23,13 @@ services:
     image: postgres:latest
     restart: always
     environment:
-      - POSTGRES_DB=tms_db
-      - POSTGRES_USER=tms_user
-      - POSTGRES_PASSWORD=tms_pass
+      - POSTGRES_DB=tickets_db
+      - POSTGRES_USER=tickets_user
+      - POSTGRES_PASSWORD=tickets_pass
     volumes:
       - pgdata:/var/lib/postgres/data
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "tms_user", "-d", "tms_db"]
+      test: ["CMD", "pg_isready", "-U", "tickets_user", "-d", "tickets_db"]
       interval: 10s
       retries: 5
     networks:

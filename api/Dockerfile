@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
-    && docker-php-ext-install pdo pdo_mysql intl opcache zip
+    && docker-php-ext-install pdo pdo_pgsql intl opcache zip
 
 # Instalar o Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
